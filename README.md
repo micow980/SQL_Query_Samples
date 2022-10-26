@@ -3,8 +3,9 @@ This is an ongoing file where I will be adding SQL Queries I have written for sp
 
 # Conditional Formatting then Group By 
 ## Find departments with less than 5 employees. Output the department along with the corresponding number of workers.
+
 select 
-    department,
+department,
     count(worker_id) as employee
 from worker
 where 2 <5
