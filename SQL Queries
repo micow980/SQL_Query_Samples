@@ -1,52 +1,52 @@
 # Conditional Formatting then Group By 
 ## Find departments with less than 5 employees. Output the department along with the corresponding number of workers.
 
-select 
+SELECT 
     department,
     count(worker_id) as employee
 from worker
-where 2 <5
-group by 1
+WHERE 2 <5
+GROUP by 1
 
 # Utilizing Unions to stack data
 ## Find employees in the HR department and output the result with one duplicate. Output the first name and the department of employees.
 
-select 
+SELECT 
     first_name
     department
-from worker
-where department = "HR"
+FROM worker
+WHERE department = "HR"
 UNION ALL
-select 
+SELECT 
     first_name
     department
-from worker
-where department = "HR";
+FROM worker
+WHERE department = "HR";
 
 # CTE/Temp Table to Dense Rank
 ## Find artists with the highest number of top 10 ranked songs over the years. Output the artist along with the corresponding number of top 10 rankings.
 
-with temp as (select
+with temp as (SELECT
 artist,
 dense_rank() over (order by count(distinct trackname)) as top_10_songs
-from (spotify_worldwide_daily_song_ranking)
-where position <= 10
-group by 1
-order by 2 DESC)
+FROM (spotify_worldwide_daily_song_ranking)
+WHERE position <= 10
+GROUP BY 1
+ORDER BY 2 DESC)
 
-select
+SELECT
 artist, 
 top_10_songs
-from temp
-where top_10_songs = (select max(top_10_songs) from temp)
+FROM temp
+WHERE top_10_songs = (select max(top_10_songs) from temp)
 
 # Dinstinct Variable
 ## Find all the songs that were top-ranked (at first position) at least once in the past 20 years.
 
-select 
+SELECT 
 distinct(song_name)
-from billboard_top_100_year_end
-where year >= 2002 and year_rank = 1
+FROM billboard_top_100_year_end
+WHERE year >= 2002 and year_rank = 1
 
 # Joining two datasets 
 ## You have a table with US rankings of tracks and another table with worldwide rankings of tracks.
