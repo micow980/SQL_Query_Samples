@@ -59,3 +59,15 @@ ON a.trackname = b.trackname AND a.date = b.date
 WHERE a.position = 1 and b.position = 1
 GROUP by a.trackname
 ORDER by num_days1
+
+# Utilizing the rank function
+## Find the email activity rank for each user. Email activity rank is defined by the total number of emails sent. The user with the highest number of emails sent will have a rank of 1, and so on. Output the user, total emails, and their activity rank. Order records by the total emails in descending order. Sort users with the same number of emails in alphabetical order.
+In your rankings, return a unique value (i.e., a unique rank) even if multiple users have the same number of emails.
+
+SELECT
+    from_user,
+    count(id) as sent_items,
+    rank() over(order by count(id) desc, from_user) as rank_order
+FROM
+    google_gmail_emails
+GROUP BY 1
