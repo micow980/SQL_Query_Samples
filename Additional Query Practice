@@ -4,3 +4,13 @@ marketing and engineering departments. Output just the absolute difference in sa
 SELECT abs(max(a.salary)-max(b.salary)) as sal_diff
 FROM db_employee a, db_employee b
 WHERE a.department_id =1 AND b.department_id = 4
+
+Find employees who are earning more than their managers. Output the employee's first name along with the corresponding salary.
+
+SELECT
+    e.first_name,
+    e.salary
+FROM employee e
+JOIN employee m
+ON e.manager_id = m.id
+WHERE e.salary > m.salary
