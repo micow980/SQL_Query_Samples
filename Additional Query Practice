@@ -1,0 +1,6 @@
+Write a query that calculates the difference between the highest salaries found in the 
+marketing and engineering departments. Output just the absolute difference in salaries.
+
+SELECT abs(max(a.salary)-max(b.salary)) as sal_diff
+FROM db_employee a, db_employee b
+WHERE a.department_id =1 AND b.department_id = 4
